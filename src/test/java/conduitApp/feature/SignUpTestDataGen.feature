@@ -4,12 +4,10 @@
       * url apiUrl
       * def dataGen = Java.type('helper.DataGenerator')
       * def timeValidator = read('classpath:helper/timeValidator.js')
+      * def randomEmail = dataGen.getRandomEmail()
+      * def randomUsername = dataGen.getRandomUsername()
 
       Scenario: New User Sign Up
-        Given def userData = {"email":"karate5@1750.com","username":"karate17505"}
-        * def randomEmail = dataGen.getRandomEmail()
-        * def randomUsername = dataGen.getRandomUsername()
-
 #        Another way to write function - randomUsername2 (changed from randomUsername)
         * def jsFunction =
         """
@@ -51,8 +49,6 @@
         """
 
    Scenario Outline: Invalid User Sign Up
-      * def randomEmail = dataGen.getRandomEmail()
-      * def randomUsername = dataGen.getRandomUsername()
       Given path 'users'
       And request
         """
