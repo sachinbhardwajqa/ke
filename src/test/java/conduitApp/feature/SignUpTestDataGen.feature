@@ -49,3 +49,26 @@
            }
         }
         """
+
+   Scenario Outline: Existing User Sign Up
+      * def randomEmail = dataGen.getRandomEmail()
+      * def randomUsername = dataGen.getRandomUsername()
+      Given path 'users'
+      And request
+        """
+        {
+          "user":
+            {
+              "email":"<email>",
+              "password":"<password>",
+              "username":"<username>"
+             }
+        }
+        """
+      When method Post
+      Then status 422
+      And match response == <errorResponse>
+     Examples:
+      | email             | password    | username           | errorResponse                                                                             |
+      | #(randomEmail)    | karate123   | karate17505        | {"errors":{"username":["has already been taken"]}}  |
+      | karate5@1750.com  | karate123   | #(randomUsername)  | {"errors":{"email":["has already been taken"]}}     |
