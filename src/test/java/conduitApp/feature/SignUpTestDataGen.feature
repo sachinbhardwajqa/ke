@@ -10,6 +10,16 @@
         * def randomEmail = dataGen.getRandomEmail()
         * def randomUsername = dataGen.getRandomUsername()
 
+#        Another way to write function - randomUsername2 (changed from randomUsername)
+        * def jsFunction =
+        """
+        function(){
+          var DataGenerator = Java.type('helper.DataGenerator')
+          var generator = new DataGenerator()
+          return generator.getRandomUsername2()
+        }
+        """
+        * def randomUsername2 = call jsFunction
         Given path 'users'
         And request
         """
@@ -18,7 +28,7 @@
             {
               "email":"#(randomEmail)",
               "password":"karate123",
-              "username":"#(randomUsername)"
+              "username":"#(randomUsername2)"
              }
         }
         """
@@ -34,7 +44,7 @@
             "id":'#number',
             "email":"#(randomEmail)",
             "updatedAt":"#? timeValidator(_)",
-            "username":"#(randomUsername)",
+            "username":"#(randomUsername2)",
             "token":"#string"
            }
         }

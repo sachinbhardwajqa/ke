@@ -16,4 +16,10 @@ public class DataGenerator {
         String username = faker.name().username() + "1750";
         return username;
     }
+
+    public String getRandomUsername2(){
+        Faker faker = new Faker();
+        String username = faker.name().username() + "1750";
+        return username;
+    }
 }
