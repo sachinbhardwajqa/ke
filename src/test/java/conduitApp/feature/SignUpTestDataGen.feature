@@ -1,4 +1,4 @@
-@debug
+@ignore
   Feature: Sign Up new user
     Background: Preconditions
       * url apiUrl

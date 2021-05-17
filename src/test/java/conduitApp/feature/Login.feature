@@ -1,4 +1,4 @@
-@ignore
+@debug
 Feature: Test for the home page
 
     Background: Define url
@@ -14,15 +14,22 @@ Feature: Test for the home page
 #        * def tokenResponse = callonce read('classpath:helper/CreateToken.feature')
 #        * def token = tokenResponse.authToken
 
+        * def articleReqBody = read('classpath:conduitApp/json/newArticle.json')
+#        * def dataGen = Java.type('helper.DataGenerator')
+#        * set articleReqBody.article.title = dataGen.getRandomArticleValues().title
+#        * set articleReqBody.article.description = dataGen.getRandomArticleValues().description
+#        * set articleReqBody.article.body = dataGen.getRandomArticleValues().body
+
         Given url apiUrl
 
         Scenario: Create Article
 #            Given header Authorization = 'Token ' + token
             And path 'articles'
-            And request {article: {tagList: [], title: "Title3", description: "About", body: "Description"}}
+#            Read from File
+            And request articleReqBody
             When method Post
             Then status 200
-            And match response.article.title == 'Title3'
+            And match response.article.title == articleReqBody.article.title
             * def articleId = response.article.slug
 
 #        Scenario: Delete the Article
